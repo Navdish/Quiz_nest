@@ -1,5 +1,6 @@
-import { Column, CreateDateColumn, DeleteDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { Column, CreateDateColumn, DeleteDateColumn, Entity, JoinColumn, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 import { Role } from "./enum/role.enum";
+import { Response } from "../response/response.entity"
 
 @Entity('User')
 export class User {
@@ -30,7 +31,6 @@ export class User {
     @DeleteDateColumn({ type: 'timestamp'})
     deleted_at: Date;
 
-    // @OneToMany(() => Response, (Response)=> Response.userId)
-    // @JoinColumn()
-    // responses: Response[]
+    @OneToMany(() => Response, (response)=> response.applicant_id)
+    responses: Response[]  
 }
